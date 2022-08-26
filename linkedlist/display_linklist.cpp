@@ -101,7 +101,7 @@ int main() {
     RDisplay(first);
     // count(first);
     // cout<<Add(first);
-    cout<<max(first);
+    // cout<<max(first);
 
     
 
