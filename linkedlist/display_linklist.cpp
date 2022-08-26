@@ -75,21 +75,21 @@ void RDisplay(node *p){
 //     return sum;
 // }
 
-int max(node *p){   // Not Understood - Recursive Function
-    int x=0;
-    if(p==0){
-        return INT32_MIN;
-    }
-    else{
-        x=max(p->next);
-        if(x>p->data){
-            return x;
-        }
-        else{
-            return p->data;
-        }
-    }
-}
+// int max(node *p){   // Not Understood - Recursive Function
+//     int x=0;
+//     if(p==0){
+//         return INT32_MIN;
+//     }
+//     else{
+//         x=max(p->next);
+//         if(x>p->data){
+//             return x;
+//         }
+//         else{
+//             return p->data;
+//         }
+//     }
+// }
 
 int main() {
 
