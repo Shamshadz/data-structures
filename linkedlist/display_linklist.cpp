@@ -129,37 +129,87 @@ int count (node *p){      // recursive method
 //     return RSearch(p->next, key);
 // }
 
-void Insert(node *p, int pos, int x)
-{
-    node *t = new node;
+// void Insert(node *p, int pos, int x)
+// {
+//     node *t = new node;
 
-    if(pos < 0 || pos > count(p))
-        return;
+//     if(pos < 0 || pos > count(p))
+//         return;
         
-    t->data = x;
-    t->next = NULL;
+//     t->data = x;
+//     t->next = NULL;
     
 
-    if (pos == 0)
-    {
-        t->next = first;
-        first = t;
+//     if (pos == 0)
+//     {
+//         t->next = first;
+//         first = t;
+//     }
+//     else
+//     {
+//         for (int i = 0; i < pos-1; i++)
+//         {
+//             p = p->next;
+//         }
+//             t->next = p->next;
+//             p->next = t;
+//     }
+// }
+
+// void sortedInsert(node *p , int n){
+//     node *t = new node;
+//     node *q = NULL;
+//     t->data = n;
+//     t->next = NULL;
+//     if (first == NULL){
+//         first = t;
+//     }
+//     else{
+//         while(p && p->data < n){
+//             q=p;
+//             p = p->next;
+//         }
+//         if (p==first){
+//             t->next = first;
+//             first = t;
+//         }
+//         else{
+//             t->next = q->next;
+//             q ->next = t;
+//         }
+//     }
+// }
+
+int deleteNode(int pos){
+    int x = -1;
+    node*q = NULL;
+    node*p = first;
+    if(pos < 1 || pos > count(p)){
+        return x;
     }
-    else
-    {
-        for (int i = 0; i < pos-1; i++)
-        {
+    if(pos==1){
+        x = first->data;
+        first = first->next;
+        delete p;
+        return -1;
+    }
+    else{
+        for(int i = 0; i < pos-1 && p; i++){
+            q = p;
             p = p->next;
         }
-            t->next = p->next;
-            p->next = t;
+        if(p)
+            q->next = p->next;
+            x = p->data;
+            delete p;
+            return x;
     }
 }
 
 int main()
 {
 
-    int A[] = {2, 4, 54, 65, 21};
+    int A[] = {2, 14, 36, 65, 121};
     node *temp = NULL;
 
     create(A, 5);
@@ -176,7 +226,9 @@ int main()
     // else
     //     cout<<"Key not found"<<endl;
 
-    Insert(first, 3, 97);
+    // Insert(first, 3, 97);
+    // sortedInsert(first,122);
+    // deleteNode(3);
     display(first);
 
     return 0;
