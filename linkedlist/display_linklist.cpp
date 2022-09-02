@@ -180,36 +180,64 @@ int count (node *p){      // recursive method
 //     }
 // }
 
-int deleteNode(int pos){
-    int x = -1;
-    node*q = NULL;
-    node*p = first;
-    if(pos < 1 || pos > count(p)){
-        return x;
-    }
-    if(pos==1){
-        x = first->data;
-        first = first->next;
-        delete p;
-        return -1;
-    }
-    else{
-        for(int i = 0; i < pos-1 && p; i++){
-            q = p;
-            p = p->next;
+// int deleteNode(int pos){
+//     int x = -1;
+//     node*q = NULL;
+//     node*p = first;
+//     if(pos < 1 || pos > count(p)){
+//         return x;
+//     }
+//     if(pos==1){
+//         x = first->data;
+//         first = first->next;
+//         delete p;
+//         return -1;
+//     }
+//     else{
+//         for(int i = 0; i < pos-1 && p; i++){
+//             q = p;
+//             p = p->next;
+//         }
+//         if(p)
+//             q->next = p->next;
+//             x = p->data;
+//             delete p;
+//             return x;
+//     }
+// }
+
+// int check_sorted(node *p){
+//     int x = INT32_MIN;
+//     while (p!=NULL)
+//     {
+//         if(x> p->data){
+//             return 0;
+//         }
+//         x = p->data;
+//         p = p->next;
+//     }
+//     return 1; 
+// }
+
+void remove_duplicate_sorted(node *p){
+    node *q = p->next;
+    while(p!= NULL){
+        if(q->data != p->data){
+            p = q;
+            q = q->next;
         }
-        if(p)
-            q->next = p->next;
-            x = p->data;
-            delete p;
-            return x;
+        else{
+            p->next = q->next;
+            delete q;
+            q = p->next;
+        }
     }
 }
 
 int main()
 {
 
-    int A[] = {2, 14, 36, 65, 121};
+    int A[] = {2, 174, 36, 36, 121};
     node *temp = NULL;
 
     create(A, 5);
@@ -229,6 +257,15 @@ int main()
     // Insert(first, 3, 97);
     // sortedInsert(first,122);
     // deleteNode(3);
+
+    // if(check_sorted(first)){
+    //     cout<<"link is sorted"<<endl;
+    // }
+    // else{
+    //     cout<<"link is not sorted"<<endl;
+    // }
+
+    remove_duplicate_sorted(first);
     display(first);
 
     return 0;
