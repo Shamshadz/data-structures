@@ -3,6 +3,7 @@
         "*.html": "html",
         "random": "cpp",
         "algorithm": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "stdio.h": "c"
     }
 }
