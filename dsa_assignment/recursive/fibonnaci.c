@@ -1,17 +1,24 @@
 // Fibonacci Series using Recursion
 #include <stdio.h>
-
-int fib(int n)
+void printFibonacci(int n)
 {
-	if (n <= 1)
-		return n;
-	return fib(n - 1) + fib(n - 2);
+    static int n1 = 0, n2 = 1, n3;
+    if (n > 0)
+    {
+        n3 = n1 + n2;
+        n1 = n2;
+        n2 = n3;
+        printf("%d ", n3);
+        printFibonacci(n - 1);
+    }
 }
-
 int main()
 {
-	int n = 3;
-	printf("%d", fib(n));
-
-	return 0;
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+    printf("Fibonacci Series: ");
+    printf("%d %d ", 0, 1);
+    printFibonacci(n - 2);
+    return 0;
 }
