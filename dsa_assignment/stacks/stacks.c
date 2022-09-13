@@ -42,7 +42,7 @@ void display(int *t)
     {
         for (i = top; i > 0; i--)
         {
-            printf("\ndata:%d", *(t + i));
+            printf("\ndata: %d", *(t + i));
         }
     }
 }
@@ -66,7 +66,6 @@ int main()
             switch (opt)
             {
             case 1:
-                /* code */
                 push(a);
 
                 break;
