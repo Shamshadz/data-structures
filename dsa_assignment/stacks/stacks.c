@@ -4,7 +4,7 @@
 int top, n;
 void push(int *t)
 {
-    int put;
+    int put; 
     if (top > n - 1)
     {
         printf("\nstack overflow");
@@ -22,7 +22,7 @@ void pop(int *t)
 
     if (top <= -1)
     {
-        printf("\nstack is already empty:\n ");
+        printf("\nstack is empty:\n ");
     }
     else
     {
@@ -42,7 +42,7 @@ void display(int *t)
     {
         for (i = top; i > 0; i--)
         {
-            printf("\ndata: %d", *(t + i));
+            printf("\ndata[%d]:%d", i, *(t + i));
         }
     }
 }

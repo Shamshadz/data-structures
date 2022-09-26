@@ -1,12 +1,8 @@
-void input(){
-    //     string x;
-    //     int y;
-    //     float z;
-    //     cout<<"Enter Real and imaginary part"<<endl;
-    //     cin>>x>>y;
-    //     cout<<"Enter Real and imaginary part"<<endl;
-    //     cin>>x>>y;
-    //     name = x;
-    //     id = y;
-    //     salary = z;
-    // };
+int arr[digits];
+    // for(int i=digits-1;i<0;i--){
+    //     arr[i] = n2%10;
+    // }
+
+    // for(int i =0;i<digits-1;i++){
+    //     cout<<arr[i]<<" ";
+    // }
