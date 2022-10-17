@@ -8,6 +8,20 @@ struct queue
     int *Q;
 };
 
+int isfull(struct queue q)
+{
+    if ((q.rear + 1) % q.size == q.front)
+        return 1;
+    else
+        return 0;
+}
+int isEmpty(struct queue q)
+{
+    if (q.front == q.rear)
+        return 1;
+    else
+        return 0;
+}
 void enqueue(struct queue *q, int x)
 {
     if (isfull(*q)) // no *q is passed in isFULL function
@@ -38,20 +52,6 @@ void display(struct queue q)
         printf("%d ", q.Q[i]);
         i = (i + 1) % q.size;
     } while (i != (q.rear + 1) % q.size);
-}
-int isfull(struct queue q)
-{
-    if ((q.rear + 1) % q.size == q.front)
-        return 1;
-    else
-        return 0;
-}
-int isEmpty(struct queue q)
-{
-    if (q.front == q.rear)
-        return 1;
-    else
-        return 0;
 }
 int first(struct queue q)
 {
