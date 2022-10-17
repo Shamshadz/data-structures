@@ -7,6 +7,7 @@ struct queue
     int rear;
     int *Q;
 };
+
 struct queue *createqueue(int max)
 {
     struct queue *q;
@@ -15,6 +16,20 @@ struct queue *createqueue(int max)
     q->front = q->rear = -1;
     q->Q = (int *)malloc(sizeof(int) * max);
     return q;
+}
+int isfull(struct queue q)
+{
+    if (q.rear == (q.size) - 1)
+        return 1;
+    else
+        return 0;
+}
+int isEmpty(struct queue q)
+{
+    if (q.front == q.rear)
+        return 1;
+    else
+        return 0;
 }
 void enqueue(struct queue *q, int x)
 {
@@ -43,20 +58,6 @@ void display(struct queue q)
     for (int i = q.front + 1; i <= q.rear; i++)
         printf("%d ", q.Q[i]);
 }
-int isfull(struct queue q)
-{
-    if (q.rear == (q.size) - 1)
-        return 1;
-    else
-        return 0;
-}
-int isEmpty(struct queue q)
-{
-    if (q.front == q.rear)
-        return 1;
-    else
-        return 0;
-}
 int first(struct queue q)
 {
     if (isEmpty(q))
@@ -71,6 +72,7 @@ int last(struct queue q)
     else
         return q.Q[q.rear];
 }
+
 int main()
 {
     system("cls");
