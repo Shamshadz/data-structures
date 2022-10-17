@@ -1,192 +1,81 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-typedef struct stack
+#include <string.h>
+#include <ctype.h>
+#include <conio.h>
+char opnds[50][80],oprs[50];
+int  topr=-1,topd=-1;
+pushd(char *opnd)
 {
-    int size;
-    char *a;
-    int top;
-} stack;
-
-int isop(char c)
+    strcpy(opnds[++topd],opnd);
+}
+char *popd()
 {
-    if (c == '+' || c == '/' || c == '-' || c == '*' || c == '(')
-    {
-        return 1;
-    }
-    return 0;
+    return(opnds[topd--]);
 }
 
-int prec(char c)
+pushr(char opr)
 {
-    if (c == '*' || c == '/')
-    {
-        return 2;
-    }
-    else if (c == '+' || c == '-')
-    {
-        return 1;
-    }
+    oprs[++topr]=opr;
 }
-void push(stack *s, char ele)
+char popr()
 {
-    s->top++;
-    if (s->top >= s->size)
-    {
-        printf("STACK OVERFLOW\n\n");
-        s->top--;
-    }
-    else
-    {
-
-        s->a[s->top] = ele;
-    }
+    return(oprs[topr--]);
+}
+int empty(int t)
+{
+    if( t == 0) return(1);
+    return(0);
 }
 
-char pop(stack *s)
+void main()
 {
-    if (s->top == -1)
-    {
-        printf("STACK IS EMPTY. \n\n");
-        return -1;
-    }
-    else
-    {
-        char x = s->a[s->top];
-        s->top--;
-        return x;
-    }
-}
+    char prfx[50],ch,str[50],opnd1[50],opnd2[50],opr[2];
+    int i=0,k=0,opndcnt=0;
 
-int isFull(stack *s)
-{
-    if (s->top >= s->size)
+    printf("Give an Expression = ");
+    gets(prfx);
+    printf(" Given Prefix Expression : %s\n",prfx);
+    while( (ch=prfx[i++]) != '\0')
     {
-        return 1;
-    }
-    return 0;
-}
-
-int isEmpty(stack *s)
-{
-    if (s->top == -1)
-    {
-        return 1;
-    }
-    return 0;
-}
-
-void display(stack *s)
-{
-    for (int i = s->top; i >= 0; i--)
-    {
-        printf("%d ", s->a[i]);
-    }
-    printf("\n");
-}
-
-char stop(stack *s)
-{
-    int x = s->top;
-    return s->a[x];
-}
-
-char *in_post(char *s)
-{
-    stack *a1 = malloc(sizeof(stack));
-    a1->size = 100;
-    a1->a = malloc(a1->size * sizeof(char));
-    a1->top = -1;
-    int i = 0;
-    int j = 0;
-    char* ans = malloc(50*sizeof(char));
-    while (s[j] != '\0')
-    {
-        if (isop(s[j]) == 0)
+        if(isalnum(ch))
         {
-            ans[i] = s[j];
-            // printf("%c\n",s[i]);
-            i++;
-            j++;
-        }
-        else if (s[j] == ')')
-        {
-            while (stop(a1) != '(')
+            str[0]=ch; str[1]='\0';
+            pushd(str); opndcnt++;
+            if(opndcnt >= 2)
             {
-                ans[i] = pop(a1);
-                i++;
+                strcpy(opnd2,popd());
+                strcpy(opnd1,popd());
+                strcpy(str,"(");
+                strcat(str,opnd1);
+                ch=popr();
+                opr[0]=ch;opr[1]='\0';
+                strcat(str,opr);
+                strcat(str,opnd2);
+                strcat(str,")");
+                pushd(str);
+                opndcnt-=1;
             }
-            j++;
-            char y = pop(a1);
-        }
-        else if ((isEmpty(a1) == 1) || prec(s[i]) < prec(stop(a1)))
-        {
-            push(a1, s[j]);
-            // printf("%c",s[i]);
-            j++;
         }
         else
         {
-            ans[i] = pop(a1);
-            // printf("%c",ans[i]);
-            i++;
+            pushr(ch);
+            if(opndcnt==1)opndcnt=0;  /* operator followed by single operand*/
         }
     }
-    while (!(isEmpty(a1)))
+    if(!empty(topd))
     {
-        ans[i] = pop(a1);
-        i++;
+        strcpy(opnd2,popd());
+        strcpy(opnd1,popd());
+        strcpy(str,"(");
+        strcat(str,opnd1);
+        ch=popr();
+        opr[0]=ch;opr[1]='\0';
+        strcat(str,opr);
+        strcat(str,opnd2);
+        strcat(str,")");
+        pushd(str);
     }
-
-    return ans;
-}
-
-char *rev(char *s)
-{
-    int i = 0;
-    stack *s1 = malloc(sizeof(stack));
-    s1->size = 100;
-    s1->a = malloc(s1->size * sizeof(char));
-    s1->top = -1;
-
-    while (s[i] != '\0')
-    {
-        push(s1, s[i]);
-
-        i++;
-    }
-    i = 0;
-    while (!(isEmpty(s1)))
-    {
-
-        s[i] = pop(s1);
-        // printf("%c",s[i]);
-        i++;
-    }
-    s[i] = '\0';
-    // printf("%s",s);
-    return s;
-}
-
-char *prefix(char *s)
-{
-    char *a = malloc(100 * sizeof(char));
-    a = rev(s);
-
-    a = in_post(a);
-
-    a = rev(a);
-
-    return a;
-}
-
-int main()
-{
-    char s[50];
-    char* a = malloc(50*sizeof(char));
-    printf("ENTER A EXPRESSION: ");
-    scanf("%s", s);
-    a = prefix(s);
-    printf("YOUR PREFIX EXPRESSION IS %s\n",a);
-    return 0;
+    printf(" Infix Expression: ");
+    puts(opnds[topd]);
+    getch();
 }
