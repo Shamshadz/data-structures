@@ -1,0 +1,3 @@
+Assuming that a text file named FIRST.TXT contains some text written into it, 
+write a function named copyupper(), that reads the file FIRST.TXT and creates a new file 
+named SECOND.TXT contains all words from the file FIRST.TXT in uppercase.
