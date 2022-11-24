@@ -1,2 +1,1 @@
-
-    ptr->data = data;
+head
