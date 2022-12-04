@@ -4,6 +4,8 @@
         "random": "cpp",
         "algorithm": "cpp",
         "ostream": "cpp",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "array": "c",
+        "string": "c"
     }
 }
