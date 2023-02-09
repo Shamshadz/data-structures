@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch maxWaterArea",
+            "request": "launch",
+            "mainClass": "maxWaterArea",
+            "projectName": "data stuctures_7f9285a6"
+        },
+        {
+            "type": "java",
             "name": "Launch reverseInt",
             "request": "launch",
             "mainClass": "reverseInt",
